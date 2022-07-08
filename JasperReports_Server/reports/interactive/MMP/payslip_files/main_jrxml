@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="payslip" pageWidth="595" pageHeight="420" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="b618ae59-9ea9-45a1-801b-df79d0ad5d79">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/interactive/MMP/payslip_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/interactive/MMP/payslip"/>
+	<queryString>
+		<![CDATA[SELECT 
+	sl.id,
+	hsr."sequence",
+	he."name" employee,
+	run.month,
+	sl.number,
+	hd.name department,
+	hpl.name slip_name,
+	hpl.total,
+	hsr.code
+	
+	
+from hr_payslip_run run 
+	inner join hr_payslip sl on sl.payslip_run_id  = run.id 
+	inner join hr_employee he on he.id = sl.employee_id
+	inner join hr_department hd on he.department_id = hd.id 
+	inner join hr_payslip_line hpl on hpl.slip_id = sl.id 
+	inner join hr_salary_rule hsr on hsr.id = hpl.salary_rule_id 
+where run.id = 8
+order by sl.id, hsr."sequence"]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_payslip"/>
+	</field>
+	<field name="sequence" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="sequence"/>
+		<property name="com.jaspersoft.studio.field.label" value="sequence"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_salary_rule"/>
+		<fieldDescription><![CDATA[Sequence]]></fieldDescription>
+	</field>
+	<field name="employee" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="employee"/>
+		<property name="com.jaspersoft.studio.field.label" value="employee"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_employee"/>
+	</field>
+	<field name="month" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="month"/>
+		<property name="com.jaspersoft.studio.field.label" value="month"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_payslip_run"/>
+		<fieldDescription><![CDATA[Payroll For Month]]></fieldDescription>
+	</field>
+	<field name="number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="number"/>
+		<property name="com.jaspersoft.studio.field.label" value="number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_payslip"/>
+		<fieldDescription><![CDATA[Reference]]></fieldDescription>
+	</field>
+	<field name="department" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="department"/>
+		<property name="com.jaspersoft.studio.field.label" value="department"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_department"/>
+	</field>
+	<field name="slip_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="slip_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="slip_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_payslip_line"/>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="total"/>
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_payslip_line"/>
+		<fieldDescription><![CDATA[Total]]></fieldDescription>
+	</field>
+	<field name="code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="code"/>
+		<property name="com.jaspersoft.studio.field.label" value="code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hr_salary_rule"/>
+		<fieldDescription><![CDATA[Code]]></fieldDescription>
+	</field>
+	<group name="slip" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<subreport>
+					<reportElement x="1" y="0" width="130" height="39" uuid="41a7a7ef-3ba0-43ec-a1f5-24b54c3f9379"/>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["repo:logo_company.jrxml"]]></subreportExpression>
+				</subreport>
+				<textField>
+					<reportElement x="130" y="1" width="290" height="38" uuid="4551e01c-f464-4ac6-83f2-8b3ad0d533cb"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="20" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["SLIP GAJI"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="501" y="7" width="54" height="15" uuid="1b90f9ef-b499-46c9-a307-7b43a7f59e65">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="421" y="7" width="64" height="15" uuid="c30598ad-6986-4131-84cb-88f41f0d0fea">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["No.Referensi"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="485" y="7" width="16" height="15" uuid="1ae78390-0753-4d20-b7ad-4801d97e9e3a">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[":"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="485" y="22" width="16" height="15" uuid="f87ae537-a212-4b7f-a2f3-d1bc7c2720ea">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[":"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="421" y="22" width="64" height="15" uuid="31d64b9d-e4f7-45bd-a3c9-bf8decdef6b6">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Bulan"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="501" y="22" width="54" height="15" uuid="746c0282-6b13-4db2-9257-089fa97c6917">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{month}]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="19">
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="be2142b4-84ac-4797-af48-d4fd109e29f1">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+				</line>
+				<textField>
+					<reportElement x="11" y="4" width="80" height="15" uuid="f7861f82-e09e-44f0-bacc-4013d9d7e4da">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Nama"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="91" y="4" width="10" height="15" uuid="b301ed3f-9d5a-423a-b48e-06574db3922b">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[":"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="101" y="4" width="170" height="15" uuid="ea18e27b-724f-4146-b1e6-a69ca0b35365">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{employee}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="290" y="4" width="80" height="15" uuid="5e2074dd-3581-45c1-abed-1c1aef67d1f7">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Department"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="370" y="4" width="10" height="15" uuid="e6507a30-613a-45bd-8f70-e1f07616b54e">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[":"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="380" y="4" width="170" height="15" uuid="820d637d-c045-47e1-a6b6-a477b88217ce">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{department}]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="23">
+				<textField>
+					<reportElement x="0" y="8" width="40" height="15" uuid="adc24d9e-51dd-4072-977e-e66934efb0ca">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["NO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="40" y="8" width="440" height="15" uuid="d9e883d2-f77f-44c6-8455-e1f630849fe1">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["KETERANGAN"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="480" y="8" width="74" height="15" uuid="adea91a9-a496-443b-97b7-61eafb627141">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["JUMLAH"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="1">
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="7755a919-0937-47d2-87a9-43c6c9eb9fa2">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<line>
+				<reportElement x="480" y="-2" width="75" height="1" uuid="1d4d1c60-ee34-46b8-88bb-92a64e679d39">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{code}.toUpperCase().contains("GROSS")]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="ElementGroupHeight" x="0" y="2" width="40" height="12" uuid="e69c0404-dbc0-4f37-95a2-af270848a98d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[!$F{code}.toUpperCase().contains("GROSS") && !$F{code}.toUpperCase().contains("NET") && !$F{code}.toUpperCase().contains("PPH")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{slip_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="ElementGroupHeight" x="40" y="2" width="440" height="12" uuid="33bcccd2-63eb-4048-967d-d1d86a3b95ea">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{slip_name}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#,##0.###;#,##0.###-">
+				<reportElement stretchType="ElementGroupHeight" x="480" y="2" width="74" height="12" uuid="f99d27a0-ae8d-49f9-9cce-80f82e2f5f5e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="43">
+			<textField>
+				<reportElement x="280" y="18" width="100" height="15" uuid="ff932b17-214f-4d6f-9573-906d4fd23311">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{employee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="18" width="100" height="15" uuid="6a5d9745-dc08-4c28-aa14-9f852c823751">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Accounting"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="16">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="81f4bf0a-7a82-4ad1-99a9-f0660308ca01">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="0" width="58" height="15" uuid="b5ded6a1-5054-44a1-977d-ab45a76c9445">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Print Date"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="0" width="10" height="15" uuid="9a8e2961-4b50-4a49-85e7-9bc0ede60ae3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy hh:mm:ss">
+				<reportElement x="69" y="1" width="110" height="15" uuid="2f44eaef-5adf-4f21-b9ce-71e0803afa74">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
